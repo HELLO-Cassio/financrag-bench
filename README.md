@@ -72,4 +72,4 @@ python scripts/validate_manifest.py docs/manifest.csv --mode release
 | E1 版本冻结 | 未完成 | 自动检查、人工验收、`E1-v1.0` 标签 |
 | E2 / E3 / E5 / E9 | 未开始 | 先完成 E1；不在本次初始化中虚构实验实现 |
 
-GitHub 默认采用私有仓库。团队协作和冻结流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。本项目尚未选定开源许可证；官方法规和第三方材料的权利归属不因入库而改变。研究基准不提供个案法律意见。
+本项目使用团队已创建的 [GitHub 仓库](https://github.com/HELLO-Cassio/financrag-bench)，沿用其现有可见性设置。团队协作和冻结流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。本项目尚未选定开源许可证；官方法规和第三方材料的权利归属不因入库而改变。研究基准不提供个案法律意见。
