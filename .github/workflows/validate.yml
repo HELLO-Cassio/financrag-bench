@@ -1,0 +1,33 @@
+name: E1 manifest checks
+
+on:
+  push:
+    branches: ['**']
+    tags: ['E1-v*']
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Validation mode (release also requires manual review)
+        type: choice
+        options: [draft, release]
+        default: draft
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regression tests
+        run: python -m unittest discover -s tests -v
+      - name: Validate draft metadata and files
+        run: python scripts/validate_manifest.py docs/manifest.csv --mode draft
+      - name: Validate release requirements
+        if: startsWith(github.ref, 'refs/tags/E1-v') || inputs.mode == 'release'
+        run: python scripts/validate_manifest.py docs/manifest.csv --mode release
