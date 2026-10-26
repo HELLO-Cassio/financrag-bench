@@ -187,14 +187,14 @@ def validate(manifest, root=REPO_ROOT, mode='draft', as_of=date(2026, 10, 23),
 
     if mode == 'release':
         roles = Counter(row['scope_tag'] for row in rows)
-        if not 15 <= len(rows) <= 25:
-            errors.append('Release requires 15-25 documents.')
-        if not 3 <= roles['核心'] <= 5:
-            errors.append('Release requires 3-5 core documents.')
-        if not 10 <= sum(roles[r] for r in ('配套', '旧版', '解释')) <= 20:
-            errors.append('Release requires 10-20 non-core documents (including old/explanatory).')
-        if sum(row['status'] in {'superseded', 'repealed'} for row in rows) < 2:
-            errors.append('Release requires at least 2 historical documents.')
+        if len(rows) != 65:
+            errors.append('Release requires exactly 65 documents.')
+        if roles['核心'] != 15:
+            errors.append('Release requires exactly 15 core documents.')
+        if sum(roles[r] for r in ('配套', '旧版', '解释')) != 50:
+            errors.append('Release requires exactly 50 non-core documents (including old/explanatory).')
+        if sum(row['status'] in {'superseded', 'repealed'} for row in rows) < 5:
+            errors.append('Release requires at least 5 historical documents (one per member).')
         if not roles['解释']:
             warnings.append('No explanatory material; review the manual category coverage.')
     return errors, warnings

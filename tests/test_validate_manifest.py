@@ -111,10 +111,10 @@ class ManifestTests(unittest.TestCase):
         self.assertTrue(self.check([row])[0])
 
     def test_release_valid_fixture(self):
-        rows = [self.row(i) for i in range(1, 16)]
-        for row in rows[3:]:
+        rows = [self.row(i) for i in range(1, 66)]
+        for row in rows[15:]:
             row['scope_tag'] = '配套'
-        for row in rows[-2:]:
+        for row in rows[-5:]:
             row.update(scope_tag='旧版', status='superseded', expiry_date='2020-02-01',
                        effective_date='2018-02-01', publish_date='2018-01-01',
                        replaced_by='DOC01')
